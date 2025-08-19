@@ -1,0 +1,18 @@
+@use "@/styles/theme";
+
+.accountIcon {
+  $size: 2.8rem;
+  width: $size;
+  height: $size;
+  margin-left: auto;
+  border-radius: 100rem;
+  background-color: white;
+  cursor: pointer;
+}
+
+.dropdownContent {
+  margin: 0.5rem;
+  .logoutLabel {
+    color: theme.$destructive;
+  }
+}

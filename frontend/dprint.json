@@ -2,11 +2,13 @@
   "biome": {
     "indentStyle": "space"
   },
-  "malva": {},
-  "excludes": [
-    "**/node_modules",
-    "**/*-lock.json"
-  ],
+  "malva": {
+    "printWidth": 100,
+    "useTabs": false,
+    "indentWidth": 2,
+    "declarationOrder": "smacss"
+  },
+  "excludes": ["**/node_modules", "**/*-lock.json"],
   "plugins": [
     "https://plugins.dprint.dev/biome-0.9.3.wasm",
     "https://plugins.dprint.dev/g-plane/malva-v0.14.1.wasm"
