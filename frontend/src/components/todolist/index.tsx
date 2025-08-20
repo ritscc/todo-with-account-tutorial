@@ -16,11 +16,10 @@ import styles from "./style.module.scss";
 export function Todolist() {
   const [backendUrl] = useAtom(backendUrlAtom);
 
-  const {
-    data: todolist,
-    error: fetchTodolistError,
-    mutate,
-  } = useSWR(backendUrl, fetchTodolist);
+  const { data: todolist, error: fetchTodolistError } = useSWR(
+    backendUrl,
+    fetchTodolist,
+  );
 
   if (fetchTodolistError) {
     throw Error(fetchTodolistError);
@@ -48,7 +47,6 @@ export function Todolist() {
       await createTodoItemTrigger({
         title: createTodoItemRef.current.value,
       });
-      mutate();
       createTodoItemRef.current.value = "";
     } catch (err) {
       toast.error(`${err}`);
@@ -62,7 +60,6 @@ export function Todolist() {
         title: todoItem.title,
         isCompleted: !todoItem.isCompleted,
       });
-      mutate();
     } catch (err) {
       toast.error(`${err}`);
     }
