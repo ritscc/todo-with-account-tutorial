@@ -21,7 +21,7 @@ hideInToc: true
 
 # 目次
 
-<Toc />
+<Toc maxDepth="1"/>
 
 ---
 src: ./pages/self-introduction.md

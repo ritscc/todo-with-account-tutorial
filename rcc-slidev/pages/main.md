@@ -178,6 +178,164 @@ curl http://localhost:3000/ping
 
 ![ping-curl](/ping-curl.png)
 
+
+---
+layout: section
+hideInToc: true
+---
+
+# データベース
+SQLiteを触ってみよう
+
+---
+hideInToc: true
+---
+
+# 色々なデータベース
+
+- **リレーショナル**: MySQL, PostgreSQL, SQLite
+- **NoSQL**: MongoDB, Redis
+
+(<Link to="9">ここ</Link>でも言ったやつ)
+
+<div class="mt-20"/>
+
+## 今日はSQLiteを使いますよ
+
+---
+hideInToc: true
+---
+
+# SQLite
+<div/>
+
+## 扱いやすい
+
+MySQLとかはサーバー上で動かすが，SQLiteはファイルひとつに集約される。
+
+<div class="mt-10"/>
+
+---
+
+## SQLiteをインストールする
+
+### Mac
+```bash
+brew install sqlite
+```
+
+### Windows
+```bash
+winget install sqlite.sqlite
+
+```
+
+### Linux
+各ディストリビューションごとに対応してください。 <span class="opacity-20">投げやり</span>
+ 
+Ubuntuの場合👇
+
+```bash
+sudo apt install sqlite3
+
+```
+
+---
+hideInToc: true
+---
+
+# データベースを操作してみよう
+<div/>
+
+<v-click>
+
+1. データベースに入る
+```bash
+sqlite3 sample.db
+```
+
+</v-click>
+
+<v-click>
+
+2. テーブルを作ってみる (最後の`;`を忘れずに)
+```sql
+create table users (id INTEGER PRIMARY KEY, name TEXT);
+```
+
+</v-click>
+
+<v-click>
+
+3. テーブル一覧を確認
+```sql
+.tables
+```
+
+</v-click>
+
+<v-click>
+
+4. テーブル構造を確認
+```sql
+.schema users
+```
+
+</v-click>
+
+<v-click>
+
+5. ユーザを作成
+```sql
+INSERT INTO users (id, name) VALUES (0, "namehere");
+```
+
+</v-click>
+
+
+<v-click>
+
+6. ユーザ一覧をみる
+```sql
+SELECT * FROM users;
+```
+
+</v-click>
+
+---
+
+## これらをプログラムから行います
+
+APIサーバー <-> データベースのやり取りに必要
+
+```mermaid {theme: 'neutral'}
+flowchart LR
+    client[クライアント...] 
+    api[APIサーバー..]
+    db[データベース..]
+    
+    client -->|User欲しい..| api
+    api <-->|Userゲット..| db
+    api -->|Userあげる..|client
+```
+
+例えば..
+
+```sql
+SELECT * FROM users;
+```
+
+これは，プログラムでこう書けます👇
+<span class="opacity-20">※ Drizzleの場合</span>
+
+```ts
+db.select().from(usersTable)
+```
+
+<div class="mt-25"/>
+
+では実際に実装していきましょう👉
+
 ---
 
 ### ユーザーの登録処理を作る
@@ -363,12 +521,64 @@ npx drizzle-kit push
 ![drizzle-kit-push](/drizzle-kit-push-ls.png)
 
 ---
+transition: slide-up
+hideInToc: true
+---
 
-#### データベースの内容を確認
+# 作られたDBを覗いてみる
+
+<v-click>
+
+1. DBに入る
+```bash
+sqlite3 local.db
+```
+
+</v-click>
+
+<v-click>
+
+2. テーブル一覧を確認
+```bash
+.tables
+```
+
+usersと，todosのテーブルははちゃんとありますか？
+
+</v-click>
+
+<v-click>
+
+3. usersテーブルのスキーマを確認
+```bash
+.schema users
+```
+
+</v-click>
 
 ---
 
-#### ユーザー一覧を取得するエンドポイントを追加
+
+4. todosテーブルのスキーマを確認
+```bash
+.schema todos
+```
+
+<v-click>
+
+5. usersテーブルの中身を見てみる
+```bash
+.tables
+SELECT * from users
+```
+
+まだ何もない..
+
+</v-click>
+
+---
+
+#### ユーザーの一覧を取得するエンドポイントを追加
 
 ``src/index.ts`` を編集
 

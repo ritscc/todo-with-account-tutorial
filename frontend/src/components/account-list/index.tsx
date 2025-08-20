@@ -26,7 +26,7 @@ export function AccountList() {
               <div key={user.id} className={styles.item} data-me={isMe}>
                 <User className={styles.icon} />
                 <div>
-                  {user.username} {isMe && "(logined)"}
+                  {user.username} {isMe && "(current)"}
                 </div>
               </div>
             );
