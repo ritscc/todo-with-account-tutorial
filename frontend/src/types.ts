@@ -7,7 +7,7 @@ export type User = {
 export type TodoItem = {
   id: number;
   title: string;
-  isCompleted: boolean;
+  completed: boolean;
 };
 
 export type CreateUserRequest = {
@@ -30,7 +30,7 @@ export type FetchTodoItemRequest = {
 export type UpdateTodoItemRequest = {
   todoId: number;
   title: string;
-  isCompleted: boolean;
+  completed: boolean;
 };
 
 export type DeleteTodoItemRequest = {

@@ -12,51 +12,90 @@ users.get("/", async (c) => {
   return c.json(users);
 });
 
+//#region get_from_id
+users.get("/:id", async (c) => {
+  const id = parseInt(c.req.param("id"));
+  
+  const user = await db.select()
+    .from(usersTable)
+    .where(eq(usersTable.id, id))
+    .get();
+
+  if (!user) {
+    return c.json({ error: "User not found" }, 404);
+  }
+  
+  return c.json(user);
+});
+//#endregion
+
 users.post("/", async (c) => {
   const { username } = await c.req.json();
-  const user = await db.select().from(usersTable).where(eq(usersTable.username, username));
-
-  if (user.length === 0) {
-    const newUser = await db.insert(usersTable).values({ username }).returning();
-    return c.json(newUser[0]);
+  
+  // まず既存のユーザーをチェック
+  const existingUser = await db.select()
+    .from(usersTable)
+    .where(eq(usersTable.username, username))
+    .get();
+  
+  // 既存のユーザーが存在する場合はそれを返す
+  if (existingUser) {
+    return c.json(existingUser);
   }
-
-  return c.json(user[0]);
+  
+  // 存在しない場合は新しいユーザーを作成
+  const newUser = await db.insert(usersTable)
+    .values({ username })
+    .returning()
+    .get();
+  return c.json(newUser);
 });
 
-users.get("/:id", async (c) => {
-  const { id } = c.req.param();
-  const user = await db.select().from(usersTable).where(eq(usersTable.id, Number(id)));
-
-  if (user.length === 0) {
-    return c.json({ error: "User not found" }, 404);
-  }
-
-  return c.json(user[0]);
-});
-
+//#region put
 users.put("/:id", async (c) => {
-  const { id } = c.req.param();
-  const { username, description } = await c.req.json();
-  const user = await db.update(usersTable).set({ username, description }).where(eq(usersTable.id, Number(id)))
-    .returning();
-
-  if (user.length === 0) {
+  const id = parseInt(c.req.param("id"));
+  const { description } = await c.req.json();
+  
+  // ユーザーが存在するかチェック
+  const existingUser = await db.select()
+    .from(usersTable)
+    .where(eq(usersTable.id, id))
+    .get();
+  
+  if (!existingUser) {
     return c.json({ error: "User not found" }, 404);
   }
-
-  return c.json(user[0]);
+  
+  // descriptionを更新
+  const updatedUser = await db.update(usersTable)
+    .set({ description })
+    .where(eq(usersTable.id, id))
+    .returning()
+    .get();
+    
+  return c.json(updatedUser);
 });
+//#endregion
 
+//#region delete
 users.delete("/:id", async (c) => {
-  const { id } = c.req.param();
-  const user = await db.delete(usersTable).where(eq(usersTable.id, Number(id))).returning();
+  const id = parseInt(c.req.param("id"));
+  
+  // ユーザーが存在するかチェック
+  const existingUser = await db.select()
+    .from(usersTable)
+    .where(eq(usersTable.id, id))
+    .get();
 
-  if (user.length === 0) {
+  if (!existingUser) {
     return c.json({ error: "User not found" }, 404);
   }
-
+  
+  // ユーザーを削除
+  await db.delete(usersTable).where(eq(usersTable.id, id));
+  
   return c.json({ message: "User deleted successfully" });
 });
+//#endregion
 
 export default users;

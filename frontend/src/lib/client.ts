@@ -112,7 +112,7 @@ export const updateTodoItem = async (
 ): Promise<TodoItem> => {
   return fetch(`${endpoint}/todos/${arg.todoId}`, {
     method: "PUT",
-    body: JSON.stringify({ title: arg.title, isCompleted: arg.isCompleted }),
+    body: JSON.stringify({ title: arg.title, completed: arg.completed }),
   }).then((r) => r.json());
 };
 

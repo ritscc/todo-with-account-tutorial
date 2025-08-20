@@ -70,7 +70,7 @@ export function Todolist() {
       await updateTodoItemTrigger({
         todoId: todoItem.id,
         title: todoItem.title,
-        isCompleted: !todoItem.isCompleted,
+        completed: !todoItem.completed,
       });
     } catch (err) {
       toast.error(`${err}`);
@@ -100,10 +100,10 @@ export function Todolist() {
         {displayTodolist.map((todoItem) => (
           <div className={styles.todoItem} key={todoItem.id}>
             <Checkbox
-              checked={todoItem.isCompleted}
+              checked={todoItem.completed}
               onClick={() => handleToggleCheck(todoItem)}
             />
-            <p data-done={todoItem.isCompleted}>{todoItem.title}</p>
+            <p data-done={todoItem.completed}>{todoItem.title}</p>
             <Button
               className={styles.deleteButton}
               variant="ghost"
