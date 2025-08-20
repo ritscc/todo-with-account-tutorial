@@ -899,6 +899,7 @@ transition: slide-up
 
 ---
 hideInToc: true
+transition: slide-up
 ---
 
 # フロントエンドで動作確認
@@ -910,7 +911,39 @@ hideInToc: true
 rm local.db && npx drizzle-kit push
 ```
 
-url にアクセスして、ユーザー登録と更新、削除が出来るか確認する
+https://todo-with-account-tutorial.vercel.app/ にアクセスして、ユーザー登録と更新、削除が出来るか確認する
+
+<img src="/frontend-1.png" width="500px">
+
+---
+transition: slide-up
+---
+
+右上の白い丸からProfileを選択
+
+![](/frontend-2.png)
+
+---
+transition: slide-up
+---
+
+Description を書き換えて Submit
+
+![](/frontend-3.png)
+
+---
+
+curl で確認してみる
+
+```sh
+curl http://localhost:1234/users
+```
+
+出力結果↓
+
+```sh
+[{"id":1,"username":"alice","description":"Hello, World!"}]
+```
 
 ---
 layout: section
@@ -1041,9 +1074,59 @@ transition: slide-up
 <<< @/snippets/todos-2.ts#delete {*}{lines:true,maxHeight:'350px'}
 
 ---
-transition: slide-up
----
 
 `src/todos.ts` の全体
 
 <<< @/snippets/todos-2.ts {*}{lines:true,maxHeight:'420px'}
+
+---
+hideInToc: true
+---
+
+# フロントエンドで動作確認
+
+https://todo-with-account-tutorial.vercel.app/
+
+![](/frontend-4.png)
+
+---
+
+### 右上のLogoutボタンでログアウトして、アカウントを切り替えてみる
+
+アカウントごとに別々のToDoリストが表示されたら完成！
+
+![](/frontend-5.png)
+
+---
+layout: section
+---
+
+# 改善点
+
+---
+
+- ガバガバセキュリティ
+  - 認証・認可の仕組みがない
+  - 誰でもデータにアクセス可能
+  - userIdが連番になっているので、簡単に推測できる
+- エラーハンドリングが不十分
+
+などなど...
+
+今回はREST APIとデータベースの操作を簡単に体験してもらうため、セキュリティ対策などは省略しています。
+
+---
+
+# おわりに
+
+### 今回の勉強会ではあまり触れなかったフロントエンドの実装などは、以下のリポジトリにまとめてあります！
+
+https://github.com/ritscc/todo-with-account-tutorial
+
+興味がある方は見てみてください！
+
+---
+layout: section
+---
+
+## ご清聴ありがとうございました！
