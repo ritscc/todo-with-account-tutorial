@@ -36,7 +36,10 @@ hideInToc: true
 
 # myuu
 
-<div class="h-4" />
+
+<div class="flex flex-row">
+
+<div>
 
 <div class="flex flex-row items-center gap-2">
   <img src="https://cdn.discordapp.com/avatars/794070299335196682/37dda65a21c7d9380ad7ddc81e7032e1.webp?size=80" />
@@ -52,4 +55,8 @@ hideInToc: true
 
 「落とし物ステーション」という学内サービスを開発・運用しています
 
-<img src="/lost-st.png" width="400" />
+</div>
+
+<img src="/lost-st.png" width="500" />
+
+</div>
