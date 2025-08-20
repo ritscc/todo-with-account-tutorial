@@ -1,11 +1,11 @@
-import { serve } from '@hono/node-server'
-import { Hono } from 'hono'
-import 'dotenv/config';
-import { cors } from 'hono/cors';
-import users from "./users.js";
+import { serve } from "@hono/node-server";
+import { Hono } from "hono";
+import "dotenv/config";
+import { cors } from "hono/cors";
 import todos from "./todos.js";
+import users from "./users.js";
 
-const app = new Hono()
+const app = new Hono();
 
 app.use(
   "*",
@@ -16,20 +16,20 @@ app.use(
   }),
 );
 
-app.get('/', (c) => {
-  return c.text('Hello Hono!')
-})
+app.get("/", (c) => {
+  return c.text("Hello Hono!");
+});
 
-app.get('/ping', (c) => {
-  return c.text('pong!')
-})
+app.get("/ping", (c) => {
+  return c.text("pong!");
+});
 
-app.route('/users', users)
-app.route('/todos', todos)
+app.route("/users", users);
+// app.route('/todos', todos)
 
 serve({
   fetch: app.fetch,
-  port: 1234
+  port: 1234,
 }, (info) => {
-  console.log(`Server is running on http://localhost:${info.port}`)
-})
+  console.log(`Server is running on http://localhost:${info.port}`);
+});

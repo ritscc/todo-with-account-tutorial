@@ -45,11 +45,6 @@ export function Todolist() {
   const createTodoItemRef = useRef<HTMLInputElement>(null);
   const displayTodolist = todolist ? [...todolist].reverse() : [];
 
-  if (fetchTodolistError) {
-    toast.error(fetchTodolistError);
-    return null;
-  }
-
   const handleCreateTodoItem = async () => {
     if (!createTodoItemRef.current || createTodoItemRef.current.value === "") {
       return;
@@ -81,7 +76,9 @@ export function Todolist() {
     deleteTodoItemTrigger({ todoId: id });
   };
 
-  return (
+  return fetchTodolistError ? (
+    <div>Failed to fetch todolist</div>
+  ) : (
     <div className={styles.todoContainer}>
       <section className={styles.createTodoItemContainer}>
         <Input
