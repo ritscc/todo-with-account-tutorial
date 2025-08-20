@@ -5,8 +5,10 @@ layout: section
 # **登壇者プロフィール**
 
 ---
+hideInToc: true
+---
 
-## CRCR
+# CRCR
 
 <div/>
 <img src="/crcr-logo.jpg" width="70"/>
@@ -29,8 +31,10 @@ layout: section
 - プログラム: Well Living Lab, レポートおたすけくん など
 
 ---
+hideInToc: true
+---
 
-## myuu
+# myuu
 
 <div class="h-4" />
 

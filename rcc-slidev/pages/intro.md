@@ -5,8 +5,10 @@ layout: section
 # **バックエンドとは？**
 
 ---
+hideInToc: true
+---
 
-## バックエンドの役割
+# バックエンドの役割
 
 <div class="h-4" />
 
@@ -21,8 +23,10 @@ layout: section
 </v-clicks>
 
 ---
+hideInToc: true
+---
 
-## フロントエンド vs バックエンド
+# フロントエンド vs バックエンド
 
 <div class="h-4" />
 
@@ -61,8 +65,10 @@ layout: section
 </div>
 
 ---
+hideInToc: true
+---
 
-## バックエンドの技術スタック
+# バックエンドの技術スタック
 
 <div class="h-4" />
 
@@ -124,8 +130,10 @@ layout: section
 # 今回の学習内容
 
 ---
+hideInToc: true
+---
 
-## 実装する機能
+# 実装する機能
 
 <v-clicks>
 
@@ -158,8 +166,10 @@ layout: section
 </v-clicks>
 
 ---
+hideInToc: true
+---
 
-## API設計の基本
+# API設計の基本
 
 <div class="h-4" />
 
@@ -211,8 +221,10 @@ DELETE /api/users/:id # ユーザー削除
 </div>
 
 ---
+hideInToc: true
+---
 
-## データベース設計
+# データベース設計
 
 <div class="h-4" />
 

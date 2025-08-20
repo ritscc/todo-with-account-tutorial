@@ -2,11 +2,17 @@
 layout: section
 ---
 
-# **実際に書いてみる**
+# **プロジェクトのセットアップ**
 
 ---
+hideInToc: true
+transition: slide-up
+---
 
-## プロジェクトの作成
+# プロジェクトの作成
+<div/>
+
+作成コマンド👇
 
 https://hono.dev/docs/#quick-start
 
@@ -17,6 +23,8 @@ npm create hono@latest
 ![create-hono](/create-hono.png)
 
 ---
+transition: slide-up
+---
 
 ### プロジェクトのフォルダを開く
 
@@ -24,14 +32,18 @@ npm create hono@latest
 cd my-app && code .
 ```
 
-![vscode](/vscode.png)
+<img src="/vscode.png" width="650rem"/>
 
 ---
+transition: slide-up
+---
 
-``src/index.ts`` を開く
+### ``src/index.ts`` を開く
 
-![index.ts.png](/index.ts.png)
+<img src="/index.ts.png" width="670rem"/>
 
+---
+transition: slide-up
 ---
 
 ### 起動してみる
@@ -69,12 +81,16 @@ serve({
 14行目の``console.log``で起動時にAPIサーバーのURLを出力している。
 
 ---
+hideInToc: true
+transition: slide-up
+---
 
-### ブラウザで開いてみよう
+# ブラウザで開いてみよう
 
 http://localhost:3000
 
-![hello-hono](/hello-hono.png)
+<img src="/hello-hono.png" width="650rem"/>
+
 
 ---
 
@@ -101,8 +117,11 @@ serve({
 6-8行目でリクエストの処理を行っている。
 
 ---
+hideInToc: true
+transition: slide-up
+---
 
-### エンドポイントを追加する
+# エンドポイントを追加する
 
 **エンドポイントとは？**
 
@@ -115,11 +134,12 @@ serve({
 各エンドポイントは特定のHTTPメソッド（GET、POST、PUT、DELETEなど）とパスの組み合わせで定義される。
 
 ---
+transition: slide-up
+---
 
-``/ping`` にアクセスすると ``pong!`` と返ってくるようにする
+`/ping` にアクセスすると `pong!` と返ってくるようにする
 
-``src/index.ts``
-##
+`src/index.ts`
 ````md magic-move
 ```ts {*}{lines:true}
 import { serve } from '@hono/node-server'
@@ -181,10 +201,9 @@ curl http://localhost:3000/ping
 
 ---
 layout: section
-hideInToc: true
 ---
 
-# データベース
+# データベースに触れてみる
 SQLiteを触ってみよう
 
 ---
@@ -216,8 +235,10 @@ MySQLとかはサーバー上で動かすが，SQLiteはファイルひとつに
 <div class="mt-10"/>
 
 ---
+hideInToc: true
+---
 
-## SQLiteをインストールする
+# SQLiteをインストールする
 
 ### Mac
 ```bash
@@ -242,6 +263,7 @@ sudo apt install sqlite3
 
 ---
 hideInToc: true
+transition: slide-up
 ---
 
 # データベースを操作してみよう
@@ -337,22 +359,14 @@ db.select().from(usersTable)
 では実際に実装していきましょう👉
 
 ---
+layout: section
+---
 
-### ユーザーの登録処理を作る
+# ユーザーの登録処理を作る
 
-Userの**スキーマ**(= 定義)を確認
+---
 
-```ts
-User {
-    id: number,
-    username: string,
-    description: string
-}
-```
-
-<div class="h4" />
-
-### データベースを導入する
+# データベースを導入する
 
 <Link to="11?clicks=8">
 
@@ -365,8 +379,10 @@ User {
 今回は [**Drizzle ORM**](https://orm.drizzle.team/) というライブラリを使用します。
 
 ---
+hideInToc: true
+---
 
-#### ORMとは？
+# ORMとは？
 
 **ORM (Object-Relational Mapping)** は、データベースとプログラミング言語のオブジェクトを結びつける技術。
 
@@ -384,10 +400,11 @@ await db.insert(users).values({ name: 'Alice' })
 ```
 
 ---
+hideInToc: true
 transition: slide-up
 ---
 
-#### Drizzle ORMのセットアップ
+# Drizzle ORMのセットアップ
 
 Get Started with Drizzle and SQLite \
 https://orm.drizzle.team/docs/get-started/sqlite-new
@@ -479,8 +496,12 @@ export default defineConfig({
 ```
 
 ---
+hideInToc: true
+transition: slide-up
+---
 
-#### テーブルを作成する
+# テーブルを作成する
+<div/>
 
 ``src/schema.ts`` を新規作成
 
@@ -577,10 +598,14 @@ SELECT * from users
 </v-click>
 
 ---
+layout: section
+---
 
-#### ユーザーの一覧を取得するエンドポイントを追加
+# ユーザーのエンドポイントを実装
 
-``src/index.ts`` を編集
+---
+
+### `src/index.ts` を編集
 
 ````md magic-move {lines:true}
 ```ts
@@ -630,7 +655,7 @@ app.get('/users', async (c) => {
 
 ---
 
-**アクセスしてみる**
+### **アクセスしてみる**
 
 ```sh
 curl http://localhost:3000/users
@@ -641,12 +666,14 @@ curl http://localhost:3000/users
 まだテーブルに何も登録されていないので、空の配列が返ってくる
 
 ---
+hideInToc: true
 transition: slide-up
 ---
 
-#### ユーザー登録のエンドポイントを実装
+# ユーザー登録のエンドポイントを実装
+<div/>
 
-``/users`` に **POST** できるようにする
+`/users` に **POST** できるようにする
 
 ```ts
 app.post("/users", async (c) => {
@@ -691,17 +718,20 @@ curl http://localhost:3000/users
 
 ![users-post-2](/users-post-2.png)
 
-TIPS: ``jq`` コマンドを使うと、JSONを整形して表示できる
+TIPS: `jq` コマンドを使うと、JSONを整形して表示できる
 
 ```
 curl -s http://localhost:3000/users | jq
 ```
 
-![jq](/jq.png)
+<img src="/jq.png" width="300rem"/>
 
 ---
+hideInToc: true
+transition: slide-up
+---
 
-#### 同じusernameのユーザーを登録するとどうなる？
+# 同じusernameのユーザーを登録するとどうなる？
 
 ```json {12-16}{lines:true}
 [
@@ -727,7 +757,7 @@ id: 3 としてユーザーの重複が発生してしまった。
 
 ---
 
-#### 重複するusernameがPOSTされた場合には、既存のユーザーを返すようにする
+### 重複するusernameがPOSTされた場合には、既存のユーザーを返すようにする
 
 ````md magic-move {lines:true}
 ```ts
@@ -764,8 +794,10 @@ app.post("/users", async (c) => {
 ````
 
 ---
+hideInToc: true
+---
 
-### フロントエンドで確認してみよう！
+# フロントエンドで確認してみよう！
 
 ````md magic-move {lines:true}
 ```ts
@@ -806,56 +838,73 @@ app.use(
 ````
 
 ---
+hideInToc: true
 transition: slide-up
 ---
 
-``/users`` 関連のエンドポイントを別のソースコードに切り分ける
+# User関連の実装を別のソースコードに切り分ける
+<div/>
 
-``src/users.ts`` を新規作成
+`src/users.ts` を新規作成
 
 <<< @/snippets/users-1.ts ts {*}{lines:true,maxHeight:'380px'}
 
 ---
 
-``src/index.ts`` を編集
+`src/index.ts` を編集
 
 <<< @/snippets/index-1.ts ts {*}{lines:true,maxHeight:'420px'}
 
 ---
+hideInToc: true
+---
 
-### ユーザーをIDで取得できるようにする
+# ユーザーをIDで取得できるようにする
 
-``GET /users/:id`` のエンドポイントを追加する
+`GET /users/:id` のエンドポイントを追加する
 
-``src/users.ts`` を編集
+`src/users.ts` を編集
 
 <<< @/snippets/users-2.ts#get_from_id {*}{lines:true,maxHeight:'350px'}
 
 ---
+hideInToc: true
+transition: slide-up
+---
 
-### ユーザーの更新と削除を実装
+# ユーザーの更新と削除を実装
+<div/>
 
-``PUT /users/:id`` と ``DELETE /users/:id`` のエンドポイントを追加する
+`PUT /users/:id`のエンドポイントを追加する
 
-``src/users.ts`` を編集
-
+`src/users.ts` 
 <<< @/snippets/users-2.ts#put {*}{lines:true,maxHeight:'350px'}
 
 ---
+transition: slide-up
+---
 
+`DELETE /users/:id` のエンドポイントを追加する
+
+`src/users.ts` 
 <<< @/snippets/users-2.ts#delete {*}{lines:true,maxHeight:'350px'}
 
 ---
+transition: slide-up
+---
 
-``src/users.ts`` の全体 (``//#region`` は気にしないでください)
+`src/users.ts` の全体 (`//#region` は気にしないでください)
 
 <<< @/snippets/users-2.ts {*}{lines:true,maxHeight:'420px'}
 
 ---
+hideInToc: true
+---
 
-### フロントエンドで動作確認
+# フロントエンドで動作確認
+<div/>
 
-一旦、``local.db`` を削除してデータベースを初期化し直しましょう
+一旦、`local.db` を削除してデータベースを初期化し直しましょう
 
 ```sh
 rm local.db && npx drizzle-kit push
@@ -864,10 +913,18 @@ rm local.db && npx drizzle-kit push
 url にアクセスして、ユーザー登録と更新、削除が出来るか確認する
 
 ---
+layout: section
+---
+
+# ToDoリストを実装する
+
+---
+hideInToc: true
 transition: slide-up
 ---
 
-## ToDoリストを実装する
+# スキーマを追加
+<div/>
 
 ``src/schema.ts`` を編集
 
@@ -901,15 +958,19 @@ npx drizzle-kit push
 ```
 
 ---
+hideInToc: true
 transition: slide-up
 ---
 
-### todosのエンドポイントを実装
+# todosのエンドポイントを実装
+<div/>
 
 ``src/todos.ts`` を新規作成
 
 <<< @/snippets/todos-1.ts {*}{lines:true}
 
+---
+transition: slide-up
 ---
 
 ``src/index.ts`` を編集
@@ -930,8 +991,10 @@ transition: slide-up
 <<< @/snippets/todos-2.ts#get {*}{lines:true,maxHeight:'350px'}
 
 ---
+transition: slide-up
+---
 
-**クエリパラメータについて**
+## **クエリパラメータについて**
 
 クエリパラメータは、URLの `?` 以降に付与される key=value 形式のパラメータ。
 
@@ -954,25 +1017,33 @@ app.get('/todos', async (c) => {
 ```
 
 ---
+transition: slide-up
+---
 
-``POST /todos`` を追加
+`POST /todos` を追加
 
 <<< @/snippets/todos-2.ts#post {*}{lines:true,maxHeight:'350px'}
 
 ---
+transition: slide-up
+---
 
-``PUT /todos/:id`` を追加
+`PUT /todos/:id` を追加
 
 <<< @/snippets/todos-2.ts#put {*}{lines:true,maxHeight:'350px'}
 
 ---
+transition: slide-up
+---
 
-``DELETE /todos/:id`` を追加
+`DELETE /todos/:id` を追加
 
 <<< @/snippets/todos-2.ts#delete {*}{lines:true,maxHeight:'350px'}
 
 ---
+transition: slide-up
+---
 
-``src/todos.ts`` の全体
+`src/todos.ts` の全体
 
 <<< @/snippets/todos-2.ts {*}{lines:true,maxHeight:'420px'}
