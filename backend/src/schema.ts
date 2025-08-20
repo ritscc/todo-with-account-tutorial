@@ -8,7 +8,7 @@ export const usersTable = sqliteTable("users", {
 
 export const todosTable = sqliteTable("todos", {
   id: int().primaryKey({ autoIncrement: true }),
-  userId: int().notNull(),
+  userId: int().notNull().references(() => usersTable.id, { onDelete: "cascade" }),
   title: text().notNull(),
   isCompleted: int({ "mode": "boolean" }).default(false).notNull(),
 });

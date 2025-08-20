@@ -48,4 +48,15 @@ users.put("/:id", async (c) => {
   return c.json(user[0]);
 });
 
+users.delete("/:id", async (c) => {
+  const { id } = c.req.param();
+  const user = await db.delete(usersTable).where(eq(usersTable.id, Number(id))).returning();
+
+  if (user.length === 0) {
+    return c.json({ error: "User not found" }, 404);
+  }
+
+  return c.json({ message: "User deleted successfully" });
+});
+
 export default users;
