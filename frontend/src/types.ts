@@ -1,6 +1,6 @@
 export type User = {
   id: string;
-  name: string;
+  username: string;
   description: string;
 };
 
@@ -8,10 +8,6 @@ export type TodoItem = {
   id: string;
   title: string;
   isCompleted: boolean;
-};
-
-export type FetchUserRequest = {
-  userId: string;
 };
 
 export type CreateUserRequest = {
@@ -23,12 +19,7 @@ export type UpdateUserRequest = {
   description: string;
 };
 
-export type FetchTodolistRequest = {
-  userId: string | undefined;
-};
-
 export type CreateTodoItemRequest = {
-  userId: string;
   title: string;
 };
 

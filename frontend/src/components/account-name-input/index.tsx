@@ -1,18 +1,19 @@
 "use client";
 
 import { useAtom } from "jotai";
+import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
+import { toast } from "sonner";
 import useSWRMutation from "swr/mutation";
 import { createUser } from "@/lib/client";
-import { backendUrlAtom, userAtom } from "@/store";
+import { backendUrlAtom } from "@/store";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import styles from "./style.module.scss";
 
 export function AccountNameInput() {
   const [backendUrl] = useAtom(backendUrlAtom);
-  const [, setUser] = useAtom(userAtom);
   const router = useRouter();
   const { trigger: createUserTrigger } = useSWRMutation(backendUrl, createUser);
 
@@ -27,10 +28,14 @@ export function AccountNameInput() {
       const user = await createUserTrigger({
         username: inputRef.current.value,
       });
-      setUser(user);
+
+      Cookies.set("user_id", user.id);
+
+      toast(`Logged in with user: ${user.username}`);
+
       router.push("/todolist");
     } catch (err) {
-      console.error(err);
+      toast.error(`${err}`);
     }
   };
 

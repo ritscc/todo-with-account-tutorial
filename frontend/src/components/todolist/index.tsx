@@ -5,21 +5,26 @@ import { useRef } from "react";
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 import { createTodoItem, fetchTodolist, updateTodoItem } from "@/lib/client";
-import { backendUrlAtom, userAtom } from "@/store";
+import { backendUrlAtom } from "@/store";
 import type { TodoItem } from "@/types";
 import { Button } from "../ui/button";
 import { Checkbox } from "../ui/checkbox";
 import { Input } from "../ui/input";
 import styles from "./style.module.scss";
+import { toast } from "sonner";
 
 export function Todolist() {
   const [backendUrl] = useAtom(backendUrlAtom);
-  const [user] = useAtom(userAtom);
 
-  const { data: todolist, mutate } = useSWR(
-    user?.id ? [backendUrl, user.id] : null,
-    ([endpoint, userId]) => fetchTodolist(endpoint, { arg: { userId } }),
-  );
+  const {
+    data: todolist,
+    error: fetchTodolistError,
+    mutate,
+  } = useSWR(backendUrl, fetchTodolist);
+
+  if (fetchTodolistError) {
+    throw Error(fetchTodolistError);
+  }
 
   const { trigger: updateTodoItemTrigger } = useSWRMutation(
     backendUrl,
@@ -35,23 +40,18 @@ export function Todolist() {
   const displayTodolist = todolist ? [...todolist].reverse() : [];
 
   const handleCreateTodoItem = async () => {
-    if (!user) {
-      throw Error("Please login");
-    }
-
     if (!createTodoItemRef.current || createTodoItemRef.current.value === "") {
       return;
     }
 
     try {
       await createTodoItemTrigger({
-        userId: user.id,
         title: createTodoItemRef.current.value,
       });
       mutate();
       createTodoItemRef.current.value = "";
     } catch (err) {
-      console.error(err);
+      toast.error(`${err}`);
     }
   };
 
@@ -64,7 +64,7 @@ export function Todolist() {
       });
       mutate();
     } catch (err) {
-      console.error(err);
+      toast.error(`${err}`);
     }
   };
 
