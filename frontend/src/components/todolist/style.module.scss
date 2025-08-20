@@ -1,13 +1,25 @@
-.todoList {
-  .todoItem {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+.todoContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 
-    p {
-      &[data-done="true"] {
-        text-decoration: line-through;
-        opacity: 50%;
+  .createTodoItemContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .todoListContainer {
+    .todoItem {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      p {
+        &[data-done="true"] {
+          text-decoration: line-through;
+          opacity: 50%;
+        }
       }
     }
   }
