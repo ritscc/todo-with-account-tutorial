@@ -1081,13 +1081,14 @@ transition: slide-up
 
 ---
 hideInToc: true
+transition: slide-up
 ---
 
 # フロントエンドで動作確認
 
 https://todo-with-account-tutorial.vercel.app/
 
-![](/frontend-4.png)
+<img src="/frontend-4.png" width="600rem">
 
 ---
 
@@ -1095,7 +1096,7 @@ https://todo-with-account-tutorial.vercel.app/
 
 アカウントごとに別々のToDoリストが表示されたら完成！
 
-![](/frontend-5.png)
+<img src="/frontend-5.png" width="600rem">
 
 ---
 layout: section
