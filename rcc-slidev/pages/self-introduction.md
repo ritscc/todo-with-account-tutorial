@@ -2,16 +2,16 @@
 layout: section
 ---
 
-# **自己紹介**
+# **登壇者プロフィール**
 
 ---
 
-# CRCR
+## CRCR
 
 <div/>
 <img src="/crcr-logo.jpg" width="70"/>
 
-<div class="h-3"/>
+<div class="h-4" />
 
 ### SNS
 
@@ -34,7 +34,9 @@ layout: image-right
 image: /server.jpg
 ---
 
-# myuu
+## myuu
+
+<div class="h-4" />
 
 <div class="flex flex-row items-center gap-2">
   <img src="https://cdn.discordapp.com/avatars/794070299335196682/37dda65a21c7d9380ad7ddc81e7032e1.webp?size=80" />
