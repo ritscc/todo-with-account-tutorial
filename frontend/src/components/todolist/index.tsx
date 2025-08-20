@@ -2,6 +2,7 @@
 
 import { useAtom } from "jotai";
 import { useRef } from "react";
+import { toast } from "sonner";
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
 import { createTodoItem, fetchTodolist, updateTodoItem } from "@/lib/client";
@@ -11,7 +12,6 @@ import { Button } from "../ui/button";
 import { Checkbox } from "../ui/checkbox";
 import { Input } from "../ui/input";
 import styles from "./style.module.scss";
-import { toast } from "sonner";
 
 export function Todolist() {
   const [backendUrl] = useAtom(backendUrlAtom);
@@ -71,7 +71,15 @@ export function Todolist() {
   return (
     <div className={styles.todoContainer}>
       <section className={styles.createTodoItemContainer}>
-        <Input className={styles.input} ref={createTodoItemRef} />
+        <Input
+          className={styles.input}
+          ref={createTodoItemRef}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleCreateTodoItem();
+            }
+          }}
+        />
         <Button onClick={handleCreateTodoItem}>Create</Button>
       </section>
 
