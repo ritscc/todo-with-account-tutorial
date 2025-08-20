@@ -35,6 +35,9 @@ importers:
       js-cookie:
         specifier: ^3.0.5
         version: 3.0.5
+      lucide:
+        specifier: ^0.540.0
+        version: 0.540.0
       lucide-react:
         specifier: ^0.540.0
         version: 0.540.0(react@19.1.0)
@@ -1052,6 +1055,9 @@ packages:
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
+  lucide@0.540.0:
+    resolution: {integrity: sha512-jUaVZLW/lSmbiZEnhIaV0wUHedNtguzFRf0cWsJi65jz1T/CCRBiiixBdgllNqhIBbe++bh39Vb7i739RPlZWQ==}
+
   magic-string@0.30.17:
     resolution: {integrity: sha512-sNPKHvyjVf7gyjwS4xGTaW/mCnF8wnjtifKBEhxfZ7E/S8tQ0rssrwGNn6q8JH/ohItJfSQp9mBtQYuTlH5QnA==}
 
@@ -2058,6 +2064,8 @@ snapshots:
   lucide-react@0.540.0(react@19.1.0):
     dependencies:
       react: 19.1.0
+
+  lucide@0.540.0: {}
 
   magic-string@0.30.17:
     dependencies:

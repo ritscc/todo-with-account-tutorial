@@ -5,13 +5,19 @@ import { useRef } from "react";
 import { toast } from "sonner";
 import useSWR from "swr";
 import useSWRMutation from "swr/mutation";
-import { createTodoItem, fetchTodolist, updateTodoItem } from "@/lib/client";
+import {
+  createTodoItem,
+  deleteTodoItem,
+  fetchTodolist,
+  updateTodoItem,
+} from "@/lib/client";
 import { backendUrlAtom } from "@/store";
 import type { TodoItem } from "@/types";
 import { Button } from "../ui/button";
 import { Checkbox } from "../ui/checkbox";
 import { Input } from "../ui/input";
 import styles from "./style.module.scss";
+import { Trash } from "lucide-react";
 
 export function Todolist() {
   const [backendUrl] = useAtom(backendUrlAtom);
@@ -20,10 +26,6 @@ export function Todolist() {
     backendUrl,
     fetchTodolist,
   );
-
-  if (fetchTodolistError) {
-    throw Error(fetchTodolistError);
-  }
 
   const { trigger: updateTodoItemTrigger } = useSWRMutation(
     backendUrl,
@@ -35,8 +37,18 @@ export function Todolist() {
     createTodoItem,
   );
 
+  const { trigger: deleteTodoItemTrigger } = useSWRMutation(
+    backendUrl,
+    deleteTodoItem,
+  );
+
   const createTodoItemRef = useRef<HTMLInputElement>(null);
   const displayTodolist = todolist ? [...todolist].reverse() : [];
+
+  if (fetchTodolistError) {
+    toast.error(fetchTodolistError);
+    return null;
+  }
 
   const handleCreateTodoItem = async () => {
     if (!createTodoItemRef.current || createTodoItemRef.current.value === "") {
@@ -65,6 +77,10 @@ export function Todolist() {
     }
   };
 
+  const handleDelete = (id: string) => {
+    deleteTodoItemTrigger({ todoId: id });
+  };
+
   return (
     <div className={styles.todoContainer}>
       <section className={styles.createTodoItemContainer}>
@@ -88,6 +104,13 @@ export function Todolist() {
               onClick={() => handleToggleCheck(todoItem)}
             />
             <p data-done={todoItem.isCompleted}>{todoItem.title}</p>
+            <Button
+              className={styles.deleteButton}
+              variant="ghost"
+              onClick={() => handleDelete(todoItem.id)}
+            >
+              <Trash />
+            </Button>
           </div>
         ))}
       </section>
