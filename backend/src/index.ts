@@ -25,7 +25,7 @@ app.get("/ping", (c) => {
 });
 
 app.route("/users", users);
-// app.route('/todos', todos)
+app.route("/todos", todos);
 
 serve({
   fetch: app.fetch,
