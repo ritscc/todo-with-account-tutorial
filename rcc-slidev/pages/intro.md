@@ -224,10 +224,11 @@ DELETE /api/users/:id # ユーザー削除
 
 ### Usersテーブル
 ```sql
-id: number (PK)
-username: string (unique)
-description: string
-createdAt: datetime
+CREATE TABLE users (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  username TEXT NOT NULL,
+  description TEXT NOT NULL DEFAULT ''
+);
 ```
 
 </div>
@@ -236,12 +237,13 @@ createdAt: datetime
 
 ### Todosテーブル  
 ```sql
-id: number (PK)
-userId: number (FK)
-title: string
-completed: boolean
-createdAt: datetime
-updatedAt: datetime
+CREATE TABLE todos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    userId INTEGER NOT NULL,
+    title TEXT NOT NULL,
+    completed INTEGER DEFAULT 0 NOT NULL,
+    FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE
+);
 ```
 
 </div>

@@ -29,10 +29,6 @@ layout: section
 - プログラム: Well Living Lab, レポートおたすけくん など
 
 ---
-layout: image-right
-
-image: /server.jpg
----
 
 ## myuu
 
