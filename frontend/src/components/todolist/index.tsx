@@ -1,6 +1,7 @@
 "use client";
 
 import { useAtom } from "jotai";
+import { Trash } from "lucide-react";
 import { useRef } from "react";
 import { toast } from "sonner";
 import useSWR from "swr";
@@ -17,7 +18,6 @@ import { Button } from "../ui/button";
 import { Checkbox } from "../ui/checkbox";
 import { Input } from "../ui/input";
 import styles from "./style.module.scss";
-import { Trash } from "lucide-react";
 
 export function Todolist() {
   const [backendUrl] = useAtom(backendUrlAtom);
@@ -77,7 +77,7 @@ export function Todolist() {
     }
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = (id: number) => {
     deleteTodoItemTrigger({ todoId: id });
   };
 

@@ -1,11 +1,11 @@
 export type User = {
-  id: string;
+  id: number;
   username: string;
   description: string;
 };
 
 export type TodoItem = {
-  id: string;
+  id: number;
   title: string;
   isCompleted: boolean;
 };
@@ -24,15 +24,15 @@ export type CreateTodoItemRequest = {
 };
 
 export type FetchTodoItemRequest = {
-  todoId: string;
+  todoId: number;
 };
 
 export type UpdateTodoItemRequest = {
-  todoId: string;
+  todoId: number;
   title: string;
   isCompleted: boolean;
 };
 
 export type DeleteTodoItemRequest = {
-  todoId: string;
+  todoId: number;
 };

@@ -10,7 +10,7 @@ import type {
   User,
 } from "@/types";
 
-export const fetchAllUser = async (endpoint: string): Promise<User[]> => {
+export const fetchAllUsers = async (endpoint: string): Promise<User[]> => {
   const data = fetch(`${endpoint}/users`, { method: "GET" }).then((r) =>
     r.json(),
   );

@@ -1,0 +1,33 @@
+@use "@/styles/theme";
+
+.accountList {
+  width: 100%;
+  max-width: 20rem;
+
+  .titleContainer {
+    margin-bottom: 0.5rem;
+  }
+
+  .list {
+    .item {
+      display: flex;
+      gap: 0.2rem;
+
+      &[data-me="true"] {
+        color: red;
+      }
+
+      .icon {
+        width: 15px;
+      }
+    }
+  }
+
+  .noUserMessage {
+    width: 100%;
+    margin-top: 1rem;
+    color: theme.$muted-foreground;
+    font-size: 10pt;
+    text-align: center;
+  }
+}

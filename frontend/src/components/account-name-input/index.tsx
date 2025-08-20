@@ -20,7 +20,7 @@ export function AccountNameInput() {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = async () => {
-    if (!inputRef.current) {
+    if (!inputRef.current || inputRef.current.value === "") {
       return;
     }
 
@@ -29,7 +29,7 @@ export function AccountNameInput() {
         username: inputRef.current.value,
       });
 
-      Cookies.set("user_id", user.id);
+      Cookies.set("user_id", String(user.id));
 
       toast(`Logged in with user: ${user.username}`);
 
