@@ -564,7 +564,7 @@ sqlite3 local.db
 .tables
 ```
 
-usersと，todosのテーブルははちゃんとありますか？
+usersのテーブルははちゃんとありますか？
 
 </v-click>
 
